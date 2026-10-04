@@ -13,7 +13,8 @@ terraform {
 }
 
 provider "aws" {
-  region = var.aws_region
+  region  = var.aws_region
+  profile = "volunteer-connect" # pinned — this machine's "default" profile points at a different account
 
   default_tags {
     tags = {

@@ -3,7 +3,12 @@ resource "aws_apigatewayv2_api" "this" {
   protocol_type = "HTTP"
 
   cors_configuration {
-    allow_origins = ["http://${aws_s3_bucket_website_configuration.frontend.website_endpoint}"]
+    allow_origins = [
+      "https://${aws_cloudfront_distribution.frontend.domain_name}",
+      "https://volunteer-connect.com",
+      "https://www.volunteer-connect.com",
+      "http://localhost:5173", # local frontend dev server
+    ]
     allow_methods = ["GET", "POST", "OPTIONS"]
     allow_headers = ["content-type", "authorization"]
   }
@@ -36,7 +41,7 @@ resource "aws_apigatewayv2_route" "this" {
   target    = "integrations/${aws_apigatewayv2_integration.this[each.key].id}"
 
   authorization_type = each.value.auth_required ? "JWT" : "NONE"
-  authorizer_id       = each.value.auth_required ? aws_apigatewayv2_authorizer.cognito.id : null
+  authorizer_id      = each.value.auth_required ? aws_apigatewayv2_authorizer.cognito.id : null
 }
 
 resource "aws_apigatewayv2_stage" "default" {

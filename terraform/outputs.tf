@@ -8,8 +8,9 @@ output "frontend_bucket_name" {
   value       = aws_s3_bucket.frontend.id
 }
 
-output "frontend_website_url" {
-  value = aws_s3_bucket_website_configuration.frontend.website_endpoint
+output "frontend_url" {
+  description = "The real frontend origin — no Route 53, so this is CloudFront's own domain"
+  value       = "https://${aws_cloudfront_distribution.frontend.domain_name}"
 }
 
 output "opportunities_table_name" {

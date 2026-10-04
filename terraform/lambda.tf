@@ -1,10 +1,10 @@
 locals {
   functions = {
     create_opportunity = { route = "POST /opportunities", auth_required = true }
-    list_opportunities  = { route = "GET /opportunities", auth_required = false }
-    get_opportunity     = { route = "GET /opportunities/{id}", auth_required = false }
-    register_volunteer  = { route = "POST /opportunities/{id}/registrations", auth_required = true }
-    list_registrations  = { route = "GET /opportunities/{id}/registrations", auth_required = true }
+    list_opportunities = { route = "GET /opportunities", auth_required = false }
+    get_opportunity    = { route = "GET /opportunities/{id}", auth_required = false }
+    register_volunteer = { route = "POST /opportunities/{id}/registrations", auth_required = true }
+    list_registrations = { route = "GET /opportunities/{id}/registrations", auth_required = true }
   }
 }
 
